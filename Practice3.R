@@ -1,0 +1,25 @@
+cutpoints = c(-Inf, 0, Inf)
+Group1 = as.matrix(table(cut(gr1, cutpoints)))
+Group2 = as.matrix(table(cut(gr2, cutpoints)))
+Group3 = as.matrix(table(cut(gr3, cutpoints)))
+Sum_Gr123 = cbind(Group1, Group2, Group3)
+colnames(Sum_Gr123) <- c('Group1', 'Group2', 'Group3')
+chisq.test(Sum_Gr123)
+sum(as.integer(gr1 > 0.1))
+
+matrix.model = as.data.frame(accel)
+for (i in 1:30) {
+matrix.model = cbind(matrix.model, (times)^i)
+colnames(matrix.model)[i+1] = paste0('tiems^', i )
+}
+fit.30 = lm(accel ~., data = matrix.model)
+step.fit = step(fit.30, direction = 'both')
+summary(step.fit)
+plot(times, step.fit$residuals)
+bptest(step.fit)
+
+library(ISwR)
+attach(eba1977)
+summary(eba1977)
+ls.str(eba1977)
+table(eba1977$city) 

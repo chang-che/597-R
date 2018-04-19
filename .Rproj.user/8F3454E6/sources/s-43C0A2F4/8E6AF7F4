@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523385630642.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "8E6AF7F4",
+    "lastKnownWriteTime" : 1523385295,
+    "last_content_update" : 1523385295,
+    "path" : "~/My/math/STAT/Courses/AMS 597/597-R/Exam3_Spring_2018_Solution.R",
+    "project_path" : "Exam3_Spring_2018_Solution.R",
+    "properties" : {
+        "cursorPosition" : "13,24",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

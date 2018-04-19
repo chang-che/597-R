@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523667678667.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "655846377",
+    "id" : "AF6ABE5D",
+    "lastKnownWriteTime" : 1524160752,
+    "last_content_update" : 1524160752610,
+    "path" : "~/My/math/STAT/Courses/AMS 597/597-R/paste_cat.rmd",
+    "project_path" : "paste_cat.rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "30,1",
+        "scrollLine" : "24",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

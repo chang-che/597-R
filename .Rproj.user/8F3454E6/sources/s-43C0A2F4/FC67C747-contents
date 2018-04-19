@@ -1,0 +1,73 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+dat <- read.delim('http://www.ams.sunysb.edu/~pfkuan/Teaching/AMS597/Data/Qn1Data.txt',header=T,sep='\t')
+dat <- as.data.frame(dat)
+
+library(FrF2)
+PlanA = FrF2(nruns = 64, nfactor = 6)
+x = desnum(PlanA)
+#class(x)
+x.logical <- (x ==1)
+colnames(x.logical) <- paste0('x',1:6)
+B <- rep(NA, 64)
+
+for (i in 1:64){
+  a1 <- c(T, x.logical[i,])
+  
+  data1 <- dat[,a1,drop = F]
+  #cat(class(data1))
+  #cat(class(data1))
+  
+  #colnames(data1)[1] <- 'response'
+  fit <- glm(y ~ ., data = data1, family = 'binomial')
+  B[i] <- BIC(fit)
+}
+
+ind <- which(B == min(B))
+x.logical[ind, ]
+```
+```{r}
+paste0('x',1:10)
+```
+
+
+```{r}
+for (i in 1:64){
+  a1 <- as.vector(c(T, x.logical[i,]))
+  
+  data1 <- dat[,a1]
+  #cat(class(data1))
+  #cat(class(data1))
+  data1 <- as.data.frame(data1)
+  cat(colnames(data1))
+  #colnames(data1)[1] <- 'response'
+  fit <- glm(y ~ ., data = data1, family = 'binomial')
+  B[i] <- BIC(fit)
+}
+
+ind <- which(B == min(B))
+x.logical[ind, ]
+```
+```{r}
+B
+a1 <- as.vector(c(T, x.logical[1,]))
+  
+  data1 <- dat[,a1]
+  #cat(class(data1))
+  #cat(class(data1))
+  data1 <- as.data.frame(data1)
+  cat(colnames(data1))
+  #colnames(data1)[1] <- 'response'
+  fit <- glm(y ~ ., data = data1, family = 'binomial')
+  B[i] <- BIC(fit)
+```
+
+```{r}
+B
+
+```
+

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524107966236.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2112611787",
+    "id" : "E0BD2EE3",
+    "lastKnownWriteTime" : 1524160749,
+    "last_content_update" : 1524160749107,
+    "path" : "~/My/math/STAT/Courses/AMS 597/597-R/5th_hw.R",
+    "project_path" : "5th_hw.R",
+    "properties" : {
+        "cursorPosition" : "14,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

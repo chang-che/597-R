@@ -1,0 +1,50 @@
+---
+title: "R Notebook1"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+The purpose of this notebook is to record usage of some important functions in R. Evaluation of such function right below the chunk will strength the memory of them. And surely it will facilitate myself when I want to retrieve them later.
+
+```{r}
+library(ISLR)
+data("Auto")
+summary(Auto$mpg)
+cutpoints_1 = c(9, 17, 22.75, 23.45, 29, 46.60)
+cut(Auto$mpg, breaks = cutpoints_1)
+
+```
+The output of cut function is a vector of factors. Its length equals the one of orignal data.
+As is shown here, the cut function groups the data points into five categories based on the pre-specified intervals. The original data points are substituted by the corresponding interval which it falls in. 
+
+Using the table() will give us a table of counts which fall into any interval.
+```{r}
+table(cut(Auto$mpg, right = TRUE, breaks = cutpoints_1))
+table(cut(Auto$mpg, right = FALSE, breaks = cutpoints_1))
+```
+The 'right' option in cut() determines that the intervals which are created by the cutponits are right closed or left closed. The default is right closed interval.
+
+As we can see above, in both cases of the right closed interval or left closed interval, either the min or max of these data points will not be categorized. 
+```{r}
+
+table(cut(Auto$mpg, right = FALSE,include.lowest = T, breaks = cutpoints_1))
+
+```
+By doing this, the max points are categorized into the largest interval.
+Notice that for right = F, include.lowest actually include the maximum. 
+For right = T, include.lowest include the minimum.

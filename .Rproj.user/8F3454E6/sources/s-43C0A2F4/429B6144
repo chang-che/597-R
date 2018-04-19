@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1522952890450.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2420431394",
+    "id" : "429B6144",
+    "lastKnownWriteTime" : 1523746399,
+    "last_content_update" : 1523746399007,
+    "path" : "~/My/math/STAT/Courses/AMS 597/597-R/quiz3.R",
+    "project_path" : "quiz3.R",
+    "properties" : {
+        "cursorPosition" : "21,16",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

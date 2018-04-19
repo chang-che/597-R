@@ -1,0 +1,139 @@
+---
+title: "Quiz3 Notebook"
+output: html_notebook
+---
+
+Continuous Mixture:
+```{r}
+## simulate mixture of normal
+set.seed(123)
+S <- sample(c(1:3),10000,prob=c(0.2,0.5,0.3),replace=TRUE)
+table(S)
+
+x <- rep(NA,10000)
+x[S==1] <- rnorm(length(which(S==1)),0,1)
+x[S==2] <- rnorm(length(which(S==2)),-1,1)
+x[S==3] <- rnorm(length(which(S==3)),2,1)
+```
+```{r}
+hist(x)
+```
+
+Two ways of simulating possion with gamma prior of rate:
+1.negative binomial
+```{r}
+library(MASS)
+n <- 1000
+p <- 0.4
+r <- 10
+mu <- p*r/(1-p)
+sigma2 <- p*r/(1-p)^2
+theta <- mu^2/(sigma2-mu) ## also equals to r, i.e, theta=r
+x1 <- rnegbin(n,mu,theta)
+```
+2. possion+gamma
+```{r}
+## use the poisson-gamma formula
+lambda1 <- rgamma(n,r,scale=p/(1-p))
+x2 <- rpois(n,lambda1) #***
+#*** is also equivalent to the following
+x2 <- rep(NA,n)
+for(i in 1:n){
+  x2[i] <- rpois(1,lambda1[i])
+}
+
+qqplot(x1,x2)
+abline(0,1)
+```
+eigendecomposition and cholesky
+```{r}
+my.Sigma <- matrix(c(2,1,1,1,2,1,1,1,2),nrow=3)
+eigen(my.Sigma, symmetric = T)
+L <- chol(my.Sigma)
+L
+t(L)%*%L
+my.Sigma ==t(L)%*%L
+```
+
+Multivariate distribution
+```{r}
+genmultv.eigen <- function(n,mu,Sigma){
+  d <- length(mu)
+  ev <- eigen(Sigma,symmetric=TRUE)
+  eigen.values <- ev$values
+  P <- ev$vectors
+  Delta <- diag(sqrt(eigen.values))
+  Q <- P%*%Delta%*%t(P)
+  Z <- matrix(rnorm(n*d),nrow=n)
+  X <- Z%*%Q+matrix(rep(1,n),ncol=1)%*%t(mu)
+  return(X)
+}
+
+my.mu <- c(0,0,0)
+my.Sigma <- matrix(c(2,1,1,1,2,1,1,1,2),nrow=3)
+my.X <- genmultv.eigen(10000,my.mu,my.Sigma)
+
+colMeans(my.X)
+apply(my.X,2,mean)
+cov(my.X)
+```
+Cholesky 
+```{r}
+### generate multivariate normal using Cholesky decomposition ###
+
+genmultv.chol <- function(n,mu,Sigma){
+  d <- length(mu)
+  Q <- chol(Sigma)
+  Z <- matrix(rnorm(n*d),nrow=n)
+  X <- Z%*%Q+matrix(mu, byrow = T, nrow = n, ncol = length(mu))
+  return(X)
+}
+
+my.mu <- c(0,0,0)
+my.Sigma <- matrix(c(2,1,1,1,2,1,1,1,2),nrow=3)
+my.Xchol <- genmultv.chol(10000,my.mu,my.Sigma)
+
+colMeans(my.Xchol)
+##
+apply(my.Xchol,2,mean)
+cov(my.Xchol)
+```
+matrix(my.mu, nrow = 10, byrow = T)
+```{r}
+matrix(my.mu, nrow = 10, ncol =3, byrow = F)
+```
+Generalized inverse
+
+```{r}
+x <- matrix(c(2,4,1,2), nrow = 2)
+y <- svd(x)
+y
+```
+Regualr inverse when the matrix is square and full rank
+```{r}
+x <- matrix(c(1,2,3,4), nrow = 2)
+y <- solve(x)
+x%*%y
+```
+solve() function has many other usage, should be familarize it later on.
+
+Smooting splines
+```{r}
+#loading the Splines Packages
+require(splines)
+#ISLR contains the Dataset
+require(ISLR)
+attach(Wage) #attaching Wage dataset
+?Wage #for more details on the dataset
+agelims<-range(age)
+#Generating Test Data
+age.grid<-seq(from=agelims[1], to = agelims[2])
+```
+fit a Cubic Spline with 3 Knots (cutpoints) 
+
+```{r}
+#3 cutpoints at ages 25 ,50 ,60
+fit<-lm(wage ~ bs(age,knots = c(25,40,60)),data = Wage )
+summary(fit)
+```
+

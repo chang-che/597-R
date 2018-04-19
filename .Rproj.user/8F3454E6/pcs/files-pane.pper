@@ -1,0 +1,13 @@
+{
+    "path" : "~/My/math/STAT/Courses/AMS 597/597-R",
+    "sortOrder" : [
+        {
+            "ascending" : false,
+            "columnIndex" : 4
+        },
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
