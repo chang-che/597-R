@@ -2,7 +2,7 @@
 # 1.
 n <- 10000
 sin.vec <- sin(runif(n, min = 0, max = pi/3))
-mean(sin.vec)*3/pi
+mean(sin.vec)*pi/3
 cos(0) - cos(pi/3)
 
 # 2.
@@ -17,7 +17,12 @@ var(exp.vec/2)*(n-1)/n
 #(b)
 exp1.vec <- rexp(10000)
 exp1.vec <- exp1.vec[exp1.vec<=0.5]
-w_star <- mean()
+w_star <- rep(1-exp(-0.5), 10000)
+var(w_star)
+
+(c)
+#omega_star's variance is smaller.
+
 ########
 #3.
 #(a)
@@ -85,14 +90,14 @@ x <- rnorm(50)
 
 y <- 0.2*x+rnorm(50)
 
-r0 <- cor(x,y)
+r0 <- cor(x,y,method = 'spearman')
 xy <- c(x, y)
 
 B <- 1000
 cor.vec <-  rep(NA,B)
 for (b in 1:B){
   x_index <- sample(1:100, 50, replace = F)
-  cor.vec[b] <- cor(xy[x_index], xy[-x_index])
+  cor.vec[b] <- cor(xy[x_index], xy[-x_index], method = 'spearman')
 }
 cat('The achieved significance level of permutation test is', sum(abs(cor.vec)>= abs(r0))/B)
 cat('The p-value of cor.test is', cor.test(x, y, method = 'spearman', exact = T)$p.value)
